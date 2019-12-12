@@ -29,17 +29,26 @@ defmodule Primex do
     end
   end
 
+  @doc """
+  c: integer - square of the current prime
+  inc: integer - 2x the current prime
+  """
   @spec smlt(integer, integer) :: cis
   defp smlt(c, inc) do
+    # IO.puts("smlt #{c}, #{inc}")
     {c, fn -> smlt(c + inc, inc) end}
   end
 
+  @doc """
+  p: integer - the current prime
+  returns the
+  """
   @spec smult(integer) :: cis
   defp smult(p) do
+    # IO.puts("smult #{p}")
     smlt(p * p, p + p)
   end
 
-  P
   @spec allmults(cis) :: ciss
   defp allmults({p, restps}) do
     {smult(p), fn -> allmults(restps.()) end}
@@ -59,20 +68,23 @@ defmodule Primex do
 
   @spec minusat(integer, cis) :: cis
   defp minusat(n, cmps) do
+    # n is a potential prime number
     {c, restcs} = cmps
 
     if n < c do
+      # IO.puts("#{n} < #{c} -> add #{n} to primes and go again with #{c} + 2 (#{c+2})")
       {n, fn -> minusat(n + 2, cmps) end}
     else
+      # IO.puts("#{n} >= #{c} -> #{n} is not prime, continue with restcs")
       minusat(n + 2, restcs.())
     end
   end
 
-  @spec oddprms() :: cis
-  defp oddprms() do
+  @spec odd_primes() :: cis
+  defp odd_primes() do
     {3,
      fn ->
-       {5, fn -> minusat(7, cmpsts(allmults(oddprms()))) end}
+       {5, fn -> minusat(7, cmpsts(allmults(odd_primes()))) end}
      end}
   end
 
@@ -89,7 +101,7 @@ defmodule Primex do
   def primes do
     [2]
     |> Stream.concat(
-      Stream.iterate(oddprms(), fn {_, restps} -> restps.() end)
+      Stream.iterate(odd_primes(), fn {_, restps} -> restps.() end)
       |> Stream.map(fn {p, _} -> p end)
     )
   end
