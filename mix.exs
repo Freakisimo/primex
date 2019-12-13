@@ -7,7 +7,20 @@ defmodule Primex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      description: "Sieve of Eratosthenes implementation for Elixir",
+      source_url: "https://github.com/abryrath/primex"
+    ]
+  end
+
+  def package do
+    [
+      maintainers: ["Abry Rath"],
+      licenses: ["MIT"],
+      links: %{
+        "github" => "https://github.com/abryrath/primex"
+      }
     ]
   end
 
@@ -22,7 +35,8 @@ defmodule Primex.MixProject do
   defp deps do
     [
       {:benchee, "~> 1.0", only: :dev},
-      {:benchee_html, "~> 1.0", only: :dev}
+      {:benchee_html, "~> 1.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 end

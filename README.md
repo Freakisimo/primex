@@ -26,7 +26,7 @@ be found at [https://hexdocs.pm/primex](https://hexdocs.pm/primex).
 
 Currently, Primex provides 2 API functions:
 
-1. `Primex.stream/0`
+`Primex.stream/0`
    ```elixir
    Get a Primes sieve stream
 
@@ -38,16 +38,15 @@ Currently, Primex provides 2 API functions:
       iex> Primex.stream() |> Stream.take_while(&(&1 < 100)) |> Enum.to_list()
       [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
   ```
-
-
-1. `Primex.under/1`
+---
+`Primex.under/1`
    ```elixir
    Get a stream of Primes under the given limit
 
    Examples
 
-    iex> Primex.under(100) |> Enum.to_list()
-    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+      iex> Primex.under(100) |> Enum.to_list()
+      [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
    ```
 # Benchmarks
